@@ -1,0 +1,80 @@
+<% layout('layouts/boilerplate') %> <!-- automatic views folder theke search start korbe -->
+<div class="max-w-xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg">
+		<h2 class="text-3xl text-[#353535] font-bold mb-8">Leave Application</h2>
+		<form name="myForm" onsubmit="return validateForm()" action="/leaveApplications" method="post">
+			<div class="mb-4">
+				<label class="block text-gray-700 font-bold mb-2" for="name">Name:</label>
+				<input disabled class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-green-500" id="nameInput" type="text" name="leave[name]" placeholder="Enter your name" value="<%= currentUser.firstname+' '+currentUser.lastname %>">
+				<p id="nameError" class="text-red-500 text-xs hidden">Name is required</p>
+			</div>
+			<div class="mb-4">
+				<label class="block text-gray-700 font-bold mb-2" for="name">ID:</label>
+				<input disabled class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-green-500" id="nameInput" type="text" name="leave[userId]" placeholder="Enter your name" value="<%= currentUser.username %>">
+				<p id="nameError" class="text-red-500 text-xs hidden">ID is required</p>
+			</div>
+			<div class="mb-4">
+				<label class="block text-gray-700 font-bold mb-2" for="email">Email:</label>
+				<input disabled class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-green-500" id="emailInput" type="email" name="leave[email]" placeholder="Enter your email" value="<%= currentUser.email %>">
+				<p id="emailError" class="text-red-500 text-xs hidden">Email is required</p>
+			</div>
+			<!-- <div class="mb-4">
+				<label class="block text-gray-700 font-bold mb-2" for="year">Year:</label>
+				<select disabled class=" border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-green-500"  id="year" name="leave[year]" required>
+				  <option value="1styear" <%= currentUser.year==='1styear'?'selected':'' %> >1st year</option>
+				  <option value="2ndyear" <%= currentUser.year==='2ndyear'?'selected':'' %> >2nd year</option>
+				</select>
+			</div> -->
+			<!-- <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="section">Section:</label>
+                <select disabled class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-green-500" id="section" name="leave[section]" required>
+                    <option value="A" <%= currentUser.section==='A'?'selected':'' %>>A</option>
+                    <option value="B" <%= currentUser.section==='B'?'selected':'' %>>B</option>
+                    <option value="C" <%= currentUser.section==='C'?'selected':'' %>>C</option>
+                    <option value="D" <%= currentUser.section==='D'?'selected':'' %>>D</option>
+                    <option value="E" <%= currentUser.section==='E'?'selected':'' %>>E</option>
+                    <option value="F" <%= currentUser.section==='F'?'selected':'' %>>F</option>
+                    <option value="G" <%= currentUser.section==='G'?'selected':'' %>>G</option>
+                    <option value="H" <%= currentUser.section==='H'?'selected':'' %>>H</option>
+                    <option value="I" <%= currentUser.section==='I'?'selected':'' %>>I</option>
+                    <option value="J" <%= currentUser.section==='J'?'selected':'' %>>J</option>
+                </select>
+            </div> -->
+			<!-- <div class="mb-4">
+				<label class="block text-gray-700 font-bold mb-2" for="days">Days:</label>
+				<input class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-green-500" type="number" id="days" name="leave[days]" min="1" max="7" value="1" required>
+			</div> -->
+			<div class="mb-4">
+				<label class="block text-gray-700 font-bold mb-2" for="start-date">Start Date (include):</label>
+				<div class="relative">
+				  <input required class="bg-white rounded-lg border border-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 w-full py-2 px-4 text-gray-700 leading-tight" id="start-date" type="date" name="leave[startDate]">
+				  <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+					<svg class="fill-current h-4 w-4 text-gray-500" viewBox="0 0 20 20">
+					  <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+					  <path fill-rule="evenodd" d="M17.293 6.293a1 1 0 00-1.414 0L10 12.586 4.707 7.293a1 1 0 00-1.414 1.414l5 5a1 1 0 001.414 0l7-7a1 1 0 000-1.414z" clip-rule="evenodd" />
+					</svg>
+				  </div>
+				</div>
+			  </div>
+			  <div class="mb-6">
+				<label class="block text-gray-700 font-bold mb-2" for="end-date">End Date (include):</label>
+				<div class="relative">
+				  <input required class="bg-white rounded-lg border border-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 w-full py-2 px-4 text-gray-700 leading-tight" id="end-date" type="date" name="leave[endDate]">
+				  <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+					<svg class="fill-current h-4 w-4 text-gray-500" viewBox="0 0 20 20">
+					  <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+					  <path fill-rule="evenodd" d="M17.293 6.293a1 1 0 00-1.414 0L10 12.586 4.707 7.293a1 1 0 00-1.414 1.414l5 5a1 1 0 001.414 0l7-7a1 1 0 000-1.414z" clip-rule="evenodd" />
+					</svg>
+				  </div>
+				</div>
+			  </div>
+			<div class="mb-6">
+				<label class="block text-gray-700 font-bold mb-2" for="message">Message:</label>
+				<textarea class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-green-500" id="messageInput" name="leave[message]" rows="6" placeholder="Enter your message"></textarea>
+				<p id="messageError" class="text-red-500 text-xs hidden">Message is required</p>
+			</div>
+			<div class="flex items-center justify-between">
+				<button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Apply</button>
+				<p id="formMessage" class="hidden"></p>
+			</div>
+		</form>
+	</div>

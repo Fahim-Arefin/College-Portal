@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>college portal</title>
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <!-- flowbite -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.css" rel="stylesheet" />
+    <!-- chart -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"
+        integrity="sha512-BJrCbzKPf+BjP+rmXV7Gp1C5YVJ+u5OaxDRO7E+s/wkAsOQruu5c5X9e/QAPLZ5/5ZVdoNwSkDcc7xNATa+jQ=="
+        crossorigin="anonymous" />
+    <!-- chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- tailwind css -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- custom css file -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="">
+    <%- include('../partials/navbar') %>
+        <div class="w-[80%] mx-auto mt-4">
+            <%- include('../partials/flash') %>
+        </div>
+        <header class="mt-16 text-center font-semibold text-3xl">
+            <h1 class="border-b-2 pb-4 w-2/4 mx-auto text-[#353535] tracking-wide">Notice Board</h1>
+        </header>
+        <div class="mb-12 max-w-xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg">
+            <h2 class="text-3xl text-[#353535] font-semibold mb-8 text-center">Drop A Notice</h2>
+            <form name="myForm" onsubmit="return validateForm()" action="/teacherNotices" method="post">
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="name">Name:</label>
+                    <input disabled
+                        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-green-500"
+                        id="nameInput" type="text" name="notice[noticeHolder]" placeholder="Enter your name"
+                        value="<%= currentUser.firstname+' '+currentUser.lastname %>">
+                    <p id="nameError" class="text-red-500 text-xs hidden">Name is required</p>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="email">Email:</label>
+                    <input disabled
+                        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-green-500"
+                        id="emailInput" type="email" name="notice[email]" placeholder="Enter your email"
+                        value="<%= currentUser.email %>">
+                    <p id="emailError" class="text-red-500 text-xs hidden">Email is required</p>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="section">Section:</label>
+                    <select
+                        class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-green-500"
+                        id="section" name="notice[section]" required>
+                        <option value="A" selected>A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="G">G</option>
+                        <option value="H">H</option>
+                        <option value="I">I</option>
+                        <option value="J">J</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="section">Important:</label>
+                    <select
+                        class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-green-500"
+                        id="section" name="notice[important]" required>
+                        <option value="false" selected>NO</option>
+                        <option value="true">YES</option>
+                    </select>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-bold mb-2" for="message">Message:</label>
+                    <textarea
+                        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-green-500"
+                        id="messageInput" name="notice[noticeText]" rows="6"
+                        placeholder="Enter your message"></textarea>
+                    <p id="messageError" class="text-red-500 text-xs hidden">Message is required</p>
+                </div>
+                <div class="flex items-center justify-between">
+                    <button
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Create
+                        <i class="fa-solid ml-1 fa-arrow-right-long"></i></button>
+                    <p id="formMessage" class="hidden"></p>
+                </div>
+            </form>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"></script>
+        <script src="/js/noticeFormValidate.js"></script>
+
+</body>
+
+</html>

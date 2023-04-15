@@ -1,0 +1,122 @@
+<% layout('layouts/boilerplate') %> <!-- automatic views folder theke search start korbe -->
+<!-- info -->
+<section class="flex flex-col items-center xl xl:flex-row rounded-lg mx-12 my-8 p-4 justify-around">
+    <div class="flex justify-between w-full xl:w-[30%] bg-slate-400 px-6 py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500
+                text-white h-24 mb-4 xl:mb-0">
+        <div class="tracking-wider">
+            <p class="px-4 mt-2">CGPA :</p>
+            <p class="px-4 mt-2">Year :</p>
+        </div>
+        <div class="tracking-wider text-black">
+            <p class="px-4 mt-2 bg-blue-500 shadow-2xl">4.89</p>
+            <p class="px-4 mt-2 bg-blue-500 shadow-2xl">2023</p>
+        </div>
+    </div>
+    <div class="flex justify-between w-full xl:w-[30%] bg-slate-400 px-6 py-2 rounded-lg bg-gradient-to-r from-[#02aab0] to-[#00cdac]
+                text-white h-24 mb-4 xl:mb-0">
+        <div class="tracking-wider">
+            <p class="px-4 mt-2">Current balance :</p>
+            <p class="px-4 ">Negative(-) balance means advance payment</p>
+        </div>
+        <div class="tracking-wider text-black">
+            <p class="px-4 mt-2 bg-[#00cdac] shadow-2xl">-3200</p>
+
+        </div>
+    </div>
+    <a class=" w-full xl:w-[30%] bg-slate-400 px-6 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500
+                text-white h-24 mb-4 xl:mb-0" href="http://lms.uiu.ac.bd/login/index.php" target="_blank">
+        <div class="flex justify-between">
+            <div class="tracking-wider">
+                <p class="px-4 mt-2">For online payment : </p>
+            </div>
+            <div class="tracking-wider text-black">
+                <p class="px-4 mt-2 bg-pink-500 shadow-2xl">click me</p>
+            </div>
+        </div>
+    </a>
+</section>
+
+<!-- Announcement and teacher info -->
+<section class="mx-6 flex flex-col items-center lg:flex-row lg:justify-around">
+    <div class="w-full lg:w-[50%] xl:w-[60%]">
+        <section class=" rounded-lg bg-rose-100 my-8 p-4">
+            <h1 class="bg-blue-700 w-52 text-center text-white bg-rose-500 font-semibold">Important Announcement
+            </h1>
+            <section class="bg-rose-200 m-2 px-4 py-2 overflow-y-auto h-32">
+                <div>
+                    <ul class="list-disc px-4 py-2 ">
+                        <div>
+                            <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit quia numquam
+                                aliquam
+                                facilis,
+                                placeat excepturi consequatur minus vero cupiditate ullam provident unde minima
+                                aliquid
+                                sit
+                                vel
+                                expedita laboriosam soluta porro?
+                            </li>
+                            <p>- @username</p>
+                        </div>
+                        <div>
+                            <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit quia numquam
+                                aliquam
+                                facilis,
+                                placeat excepturi consequatur minus vero cupiditate ullam provident unde minima
+                                aliquid
+                                sit
+                                vel
+                                expedita laboriosam soluta porro?
+                            </li>
+                            <p>- @username</p>
+                        </div>
+                        <div>
+                            <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit quia numquam
+                                aliquam
+                                facilis,
+                                placeat excepturi consequatur minus vero cupiditate ullam provident unde minima
+                                aliquid
+                                sit
+                                vel
+                                expedita laboriosam soluta porro?
+                            </li>
+                            <p>- @username</p>
+                        </div>
+                    </ul>
+                </div>
+            </section>
+        </section>
+    </div>
+    <div class="w-full lg:w-[40%] xl:w-[30%]">
+        <section class="rounded-lg bg-purple-100 my-8 py-4 px-6 font-semibold">
+            <h1 class="bg-purple-300 w-28 text-center">Class Teacher</h1>
+            <div class="mt-3">
+                <div class="bg-purple-200">
+                    <div class="py-2 px-4 m-2 flex justify-between">
+                        <div class="leading-10">
+                            <p>Teacher Name</p>
+                            <p>Room No</p>
+                            <p>Email Address</p>
+                            <p>Contact Number</p>
+                        </div>
+                        <div class="text-sm flex flex-col justify-around">
+                            <p class="bg-purple-300 px-2 rounded-lg">Prof. Kamal Hossain</p>
+                            <p class="bg-purple-300 px-2 rounded-lg">512</p>
+                            <p class="bg-purple-300 px-2 rounded-lg">kamal@uiu.ac.bd</p>
+                            <p class="bg-purple-300 px-2 rounded-lg">+8801814221195</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</section>
+
+<section class="w-[80%] lg:w-[50%] mx-auto">
+    <div class="">
+        <h1 class=" text-center text-xl py-4 px-6 border-b-2"><span class="bg-blue-700 py-2 px-4 bg-gradient-to-r from-[#06beb6] to-[#48b1bf] rounded-full text-white font-semibold">Attendance Chart</span></h1>
+        <div id="attendance-chart-container">
+            <canvas id="attendance-chart"></canvas>
+        </div>
+    </div>
+</section>

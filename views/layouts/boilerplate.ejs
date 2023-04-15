@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>college portal</title>
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <!-- flowbite -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.css" rel="stylesheet" />
+    <!-- chart -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"
+    integrity="sha512-BJrCbzKPf+BjP+rmXV7Gp1C5YVJ+u5OaxDRO7E+s/wkAsOQruu5c5X9e/QAPLZ5/5ZVdoNwSkDcc7xNATa+jQ=="
+    crossorigin="anonymous" />
+    <!-- chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- tailwind css -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- custom css file -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="">
+    <%- include('../partials/navbar') %>
+    <div class="w-[80%] mx-auto mt-4">
+        <%- include('../partials/flash') %>  
+    </div>
+    
+    <%- body -%> 
+    <script src="/js/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"></script>
+    <script src="/js/formValidation.js"></script>
+    
+</body>
+</html>

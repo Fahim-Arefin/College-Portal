@@ -1,0 +1,145 @@
+<% layout('layouts/boilerplate') %> <!-- automatic views folder theke search start korbe -->
+<section class="w-3/4 p-4 m-4 mx-auto mt-16">
+    <h1 class="text-center text-3xl font-semibold border-b-2 pb-4 text-[#353535]">Class Routine</h1>
+    <% if(currentUser && currentUser.tag==='student'){ %>
+            <div class="flex justify-around mt-8 border-b-2 pb-10">
+                <div class="w-1/6">
+                            <label for="section" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID:</label>
+                            <input type="text" id="disabled-input-2" aria-label="disabled input 2"
+                                class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                value=<%= currentUser.username %> disabled readonly>
+                </div>
+                <div class="w-1/6">
+                            <label for="section" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Section:</label>
+                            <select disabled id="section"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">                    
+                                        <option value="A" <%= currentUser.section==='A'?'selected':'' %>>A</option>
+                                        <option value="B" <%= currentUser.section==='B'?'selected':'' %>>B</option>
+                                        <option value="C" <%= currentUser.section==='C'?'selected':'' %>>C</option>
+                                        <option value="D" <%= currentUser.section==='D'?'selected':'' %>>D</option>
+                                        <option value="E" <%= currentUser.section==='E'?'selected':'' %>>E</option>
+                                        <option value="F" <%= currentUser.section==='F'?'selected':'' %>>F</option>
+                                        <option value="G" <%= currentUser.section==='G'?'selected':'' %>>G</option>
+                                        <option value="H" <%= currentUser.section==='H'?'selected':'' %>>H</option>
+                                        <option value="I" <%= currentUser.section==='I'?'selected':'' %>>I</option>
+                                        <option value="J" <%= currentUser.section==='J'?'selected':'' %>>J</option>
+                            </select>
+                </div>
+                <div class="w-1/6">
+                            <label for="year" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Year:</label>
+                            <select disabled id="year"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option value="1st year" <%= currentUser.year==='1styear'?'selected':''%>>1st year</option>
+                                <option value="2nd year" <%= currentUser.year==='2ndyear'?'selected':''%>>2nd year</option>
+                            </select>
+                </div>
+                <div class="w-1/6 self-end">
+                            <button type="button" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                View
+                                <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            </button>
+                </div>
+            </div>
+    <% } %>
+    <% if(currentUser && currentUser.tag==='faculty'){ %>
+            <div class="flex justify-center mt-8 border-b-2 pb-10">
+                <div class="w-1/6">
+                            <label for="section" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID:</label>
+                            <input type="text" id="disabled-input-2" aria-label="disabled input 2"
+                                class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                value=<%= currentUser.username %> disabled readonly>
+                </div>
+                <div class="w-1/6 ml-4 self-end">
+                            <button type="button" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                View
+                                <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            </button>
+                </div>
+            </div>
+    <% } %>
+</section>
+
+<section class="w-3/4 mx-auto mb-12">
+    <div class="w-3/4 mx-auto mt-6">
+        <div class="shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Subject
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            start
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            End
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Section
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Teacher                           
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Room                           
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (const routine of allRoutine) { %>
+                        <% for (const subject of routine.subject) { %>
+                            <% for (const section of subject.sec) { %>
+                                <% if((currentUser.tag==='student') && (section.name===currentUser.section)){%>
+                                    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                                        <th scope="row"
+                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            <%= subject.name %>
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            <%= section.start %>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <%= section.end %>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <%= section.name %>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <%= section.teacher %>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <%= section.room %>
+                                        </td>
+                                    </tr>
+                                <% } %>
+                                <% if((currentUser.tag==='faculty') && (section.teacher===(currentUser.firstname+' '+currentUser.lastname))){%>
+                                    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                                        <th scope="row"
+                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            <%= subject.name %>
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            <%= section.start %>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <%= section.end %>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <%= section.name %>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <%= section.teacher %>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <%= section.room %>
+                                        </td>
+                                    </tr>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
