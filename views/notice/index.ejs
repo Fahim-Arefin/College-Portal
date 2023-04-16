@@ -31,14 +31,27 @@
             <% for(let notice of teacherNotice){ %>
                     <!-- student and guardian logic -->
                     <%if(currentUser && (currentUser.tag==='student' || currentUser.tag==='guardian')){
-                        if(currentUser.section===notice.section){%>
-                            <div class="border-b-2 m-4 p-2 space-y-2 tracking-wider font-semibold">
-                                <img class="w-10" src="/images/navbar/Dp.jpg">
-                                <span class="text-sm text-gray-400"><%= notice.noticeHolder %></span>
-                                <p class="text-sm text-[#353535]"><%= notice.noticeText %></p>
-                                <span class="text-sm text-gray-400">sec : <%= notice.section %></span>
-                            </div>
-                        <%}
+                        if(currentUser.tag==='student'){
+                            if(currentUser.section===notice.section){%>
+                                <div class="border-b-2 m-4 p-2 space-y-2 tracking-wider font-semibold">
+                                    <img class="w-10" src="/images/navbar/Dp.jpg">
+                                    <span class="text-sm text-gray-400"><%= notice.noticeHolder %></span>
+                                    <p class="text-sm text-[#353535]"><%= notice.noticeText %></p>
+                                    <span class="text-sm text-gray-400">subject : <%= notice.subject %> (<%= notice.section %>) </span>
+                                </div>
+                            <%}
+                        }else{
+                            for(let user of users){
+                                if((user.section===notice.section) && (user.guardian.username===currentUser.username)){%>
+                                    <div class="border-b-2 m-4 p-2 space-y-2 tracking-wider font-semibold">
+                                        <img class="w-10" src="/images/navbar/Dp.jpg">
+                                        <span class="text-sm text-gray-400"><%= notice.noticeHolder %></span>
+                                        <p class="text-sm text-[#353535]"><%= notice.noticeText %></p>
+                                        <span class="text-sm text-gray-400">subject : <%= notice.subject %> (<%= notice.section %>) </span>
+                                    </div>
+                                <%}
+                            }
+                        }
                     } 
                     if(currentUser && currentUser.tag==='faculty'){
                         let fullname = currentUser.firstname+' '+currentUser.lastname
@@ -47,7 +60,7 @@
                                 <img class="w-10" src="/images/navbar/Dp.jpg">
                                 <span class="text-sm text-gray-400"><%= notice.noticeHolder %></span>
                                 <p class="text-sm text-[#353535]"><%= notice.noticeText %></p>
-                                <span class="text-sm text-gray-400">sec : <%= notice.section %></span>
+                                <span class="text-sm text-gray-400">subject : <%= notice.subject %> (<%= notice.section %>) </span>
                                 <div class="flex">
                                     <a class="px-5 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" href="/teacherNotices/<%= notice._id %>/edit">Edit</a>
                                     <form action="/teacherNotices/<%= notice._id %>?_method=DELETE" method="post">
@@ -58,7 +71,7 @@
                             </div>
                         <%}
                     } 
-                } %>    
+            } %>    
         </div>
     </div>
 

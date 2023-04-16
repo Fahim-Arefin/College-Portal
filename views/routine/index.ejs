@@ -35,7 +35,7 @@
                 </div>
                 <div class="w-1/6 self-end">
                             <button type="button" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                View
+                                view
                                 <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                             </button>
                 </div>
@@ -57,6 +57,51 @@
                 </div>
             </div>
     <% } %>
+    <% if(currentUser && currentUser.tag==='guardian'){ 
+        for(let findUser of user){
+            if(currentUser.username===findUser.guardian.username){%>
+                <div class="flex justify-around mt-8 border-b-2 pb-10">
+                        <div class="w-1/6">
+                                    <label for="section" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID:</label>
+                                    <input type="text" id="disabled-input-2" aria-label="disabled input 2"
+                                        class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        value=<%= findUser.username %> disabled readonly>
+                        </div>
+                        <div class="w-1/6">
+                                    <label for="section" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Section:</label>
+                                    <select disabled id="section"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">                    
+                                                <option value="A" <%= findUser.section==='A'?'selected':'' %>>A</option>
+                                                <option value="B" <%= findUser.section==='B'?'selected':'' %>>B</option>
+                                                <option value="C" <%= findUser.section==='C'?'selected':'' %>>C</option>
+                                                <option value="D" <%= findUser.section==='D'?'selected':'' %>>D</option>
+                                                <option value="E" <%= findUser.section==='E'?'selected':'' %>>E</option>
+                                                <option value="F" <%= findUser.section==='F'?'selected':'' %>>F</option>
+                                                <option value="G" <%= findUser.section==='G'?'selected':'' %>>G</option>
+                                                <option value="H" <%= findUser.section==='H'?'selected':'' %>>H</option>
+                                                <option value="I" <%= findUser.section==='I'?'selected':'' %>>I</option>
+                                                <option value="J" <%= findUser.section==='J'?'selected':'' %>>J</option>
+                                    </select>
+                        </div>
+                        <div class="w-1/6">
+                                    <label for="year" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Year:</label>
+                                    <select disabled id="year"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option value="1st year" <%= findUser.year==='1styear'?'selected':''%>>1st year</option>
+                                        <option value="2nd year" <%= findUser.year==='2ndyear'?'selected':''%>>2nd year</option>
+                                    </select>
+                        </div>
+                        <div class="w-1/6 self-end">
+                                    <button type="button" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                        View
+                                        <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                    </button>
+                        </div>
+                </div>
+            <%  break
+            }
+        }
+    } %>
 </section>
 
 <section class="w-3/4 mx-auto mb-12">
@@ -135,6 +180,31 @@
                                         </td>
                                     </tr>
                                 <% } %>
+                                <%for(let findUser of user){
+                                    if((currentUser.tag==='guardian') && ((section.name===findUser.section) && (currentUser.username===findUser.guardian.username) )){%>
+                                    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                                        <th scope="row"
+                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            <%= subject.name %>
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            <%= section.start %>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <%= section.end %>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <%= section.name %>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <%= section.teacher %>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <%= section.room %>
+                                        </td>
+                                    </tr>
+                                <% }
+                                } %>
                             <% } %>
                         <% } %>
                     <% } %>

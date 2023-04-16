@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const {firstNames,lastNames} = require('./nameSeed')
 const TeacherNotice = require('../models/teachersNotice')
+const User = require('../models/user')
 
 //connection with mongoose
 //---------------------------------------------------------------------------------------------------------------
@@ -16,18 +17,51 @@ mongoose
 //----------------------------------------------------------------------------------------------------------------
 
 const sec = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+const subjects = [
+  "bangla_1st_paper",
+  "bangla_2nd_paper",
+  "english_1st_paper",
+  "english_2nd_paper",
+  "biology_1st_paper",
+  "biology_2nd_paper",
+  "chemistry_1st_paper",
+  "chemistry_2nd_paper",
+  "physics_1st_paper",
+  "physics_2nd_paper",
+  "general_math",
+  "higher_math",
+  "ict",
+];
+const teachers = []
 
+async function generateTeacher(){
+  const allfaculty = await User.find({tag:'faculty'})
+  for(let faculty of allfaculty){
+    let fullname = faculty.firstname+" "+faculty.lastname
+    teachers.push(fullname)
+  }
+}
+generateTeacher()
+
+function getRandomTeacher() {
+  const index = Math.floor(Math.random() * teachers.length);
+  return teachers[index];
+}
+
+function getRandomsubject() {
+  const index = Math.floor(Math.random() * subjects.length);
+  return subjects[index];
+}
 
 const seedTeacherNotice = async () => {
     await TeacherNotice.deleteMany({});
     for (let i = 0; i < 100; i++) {
-        const randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-        const randomLastName = lastNames[Math.floor(Math.random() * lastNames.length)];
         const rand0to9 = Math.floor(Math.random() * 10);
         const teacherNotice = new TeacherNotice({
-            noticeHolder:randomFirstName+' '+randomLastName,
-            noticeText:'The fact that the users had shown interest points to their intent to subscribe. Give them a nudge, remind them about the benefits of subscribing and the exclusive content they get access to. A quick reminder goes a long way.',
-            section:sec[rand0to9]
+            noticeHolder:getRandomTeacher(),
+            noticeText:'This Notice is Seeded, so its section can not match with the teacher currently taking sections But teacher name is appropiate just the section is randomly seed',
+            section:sec[rand0to9],
+            subject:getRandomsubject()
         })
         await teacherNotice.save()
     }

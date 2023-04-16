@@ -50,23 +50,25 @@
                         value="<%= currentUser.email %>">
                     <p id="emailError" class="text-red-500 text-xs hidden">Email is required</p>
                 </div>
+
                 <div class="mb-4">
                     <label class="block text-gray-700 font-bold mb-2" for="section">Section:</label>
-                    <select
+                    <select disabled
                         class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-green-500"
-                        id="section" name="notice[section]" required>
-                        <option value="A" <%= notice.section==='A'?'selected':'' %>>A</option>
-                        <option value="B" <%= notice.section==='B'?'selected':'' %>>B</option>
-                        <option value="C" <%= notice.section==='C'?'selected':'' %>>C</option>
-                        <option value="D" <%= notice.section==='D'?'selected':'' %>>D</option>
-                        <option value="E" <%= notice.section==='E'?'selected':'' %>>E</option>
-                        <option value="F" <%= notice.section==='F'?'selected':'' %>>F</option>
-                        <option value="G" <%= notice.section==='G'?'selected':'' %>>G</option>
-                        <option value="H" <%= notice.section==='H'?'selected':'' %>>H</option>
-                        <option value="I" <%= notice.section==='I'?'selected':'' %>>I</option>
-                        <option value="J" <%= notice.section==='J'?'selected':'' %>>J</option>
+                        id="section" name="notice[subject]" required>
+                        <option value="<%= notice.subject %>"><%= notice.subject %></option>
                     </select>
                 </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="section">Section:</label>
+                    <select disabled
+                        class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-green-500"
+                        id="section" name="notice[section]" required>
+                        <option value="<%= notice.section%>"><%= notice.section%></option>
+                    </select>
+                </div>
+                
                 <div class="mb-4">
                     <label class="block text-gray-700 font-bold mb-2" for="section">Important:</label>
                     <select

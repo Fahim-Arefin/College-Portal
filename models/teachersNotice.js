@@ -13,6 +13,10 @@ const teacherNoticeSchema = new mongoose.Schema({
         type:Boolean,
         default:false
     },
+    subject:{
+        type:String,
+        required:true
+    },
     section:{
         type:String,
         required:true

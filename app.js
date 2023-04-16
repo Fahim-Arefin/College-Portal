@@ -168,3 +168,7 @@ app.use((err, req, res, next) => {
 //then seed - userReationSeed   (faculty[0] --> first 15 students classteacher)
 //                              (faculty[1] --> last 15 students classteacher)
 
+//then seed routineSeed
+//then seed teacherNoticeSeed   --> no need to seed avoid seed
+
+

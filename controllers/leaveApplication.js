@@ -105,7 +105,7 @@ module.exports.acceptedApplication = async (req, res,next) => {
 
         const msg = buildMail(to,from,subject,html)
         const isMailSendToGuardian = await sendMail(msg)
-        console.log(isMailSendToStudent)
+        console.log(isMailSendToGuardian)
 
         if(isMailSendToGuardian){
               const deletedApplication = await Leave.findByIdAndDelete(leaveID);
@@ -162,7 +162,7 @@ module.exports.rejectedApplication = async (req, res,next) => {
     
     let to = 'mfahim181238@bscse.uiu.ac.bd'
     let from = 'fahimarefin57@gmail.com'
-    let subject = 'Do not reply this automated mail'
+    let subject = 'Do not reply this bot generate automated mail'
     let html = `<b>Hello ${leaveApplciation.applicant.firstname+' '+leaveApplciation.applicant.lastname}</b><br>
                 You are Requested for ${leaveApplciation.days} days leave.<br>
                 Your Class Teacher ${leaveApplciation.applicant.classTeacher.firstname+' '+leaveApplciation.applicant.classTeacher.lastname}
@@ -176,7 +176,7 @@ module.exports.rejectedApplication = async (req, res,next) => {
 
         let to = 'maf181238@gmail.com'
         let from = 'fahimarefin57@gmail.com'
-        let subject = 'Do not reply this automated mail'
+        let subject = 'Do not reply this bot generate automated mail'
         let html = `<b>Hello ${leaveApplciation.applicant.guardian.firstname+' '+leaveApplciation.applicant.guardian.lastname}</b><br>
                     Your chlid ${leaveApplciation.applicant.firstname+' '+leaveApplciation.applicant.lastname} is Requested for ${leaveApplciation.days} days leave.<br>
                     His Class Teacher ${leaveApplciation.applicant.classTeacher.firstname+' '+leaveApplciation.applicant.classTeacher.lastname}
@@ -184,7 +184,7 @@ module.exports.rejectedApplication = async (req, res,next) => {
 
         const msg = buildMail(to,from,subject,html)
         const isMailSendToGuardian = await sendMail(msg)
-        console.log(isMailSendToStudent)
+        console.log(isMailSendToGuardian)
 
         if(isMailSendToGuardian){
               const deletedApplication = await Leave.findByIdAndDelete(leaveID);
