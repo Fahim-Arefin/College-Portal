@@ -25,6 +25,7 @@ const leaveAppRoutes = require('./routes/leaveApplication')
 const teacherNoticeRoutes = require('./routes/teacherNotice')
 const universityNoticeRoutes = require('./routes/universityNotice')
 const routineRoutes = require('./routes/routine')
+const courseRoutes = require('./routes/course')
 
 // --------------------------------------------------------------------------------------------------------------
 
@@ -140,6 +141,9 @@ app.use('/universityNotices',universityNoticeRoutes)
 
 //Routine Route
 app.use('/routines',routineRoutes)
+
+//Course Index Route
+app.use('/courses',courseRoutes)
 
 
 //if no route is match then its run
