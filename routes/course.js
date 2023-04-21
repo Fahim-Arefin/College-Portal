@@ -42,4 +42,8 @@ router.put('/:subjectID/:sectionID',isLoggedIn,isTeacher,anyFile.array('file'),c
 
 router.get('/slide/download/:slideID',isLoggedIn,courseController.slideDownload)
 
+router.delete('/:subjectID/:sectionID/:deleteObjID',isLoggedIn,isTeacher,courseController.delete)
+
+router.patch('/:subjectID/:sectionID/:updateObjID',isLoggedIn,isTeacher,courseController.update)
+
 module.exports = router

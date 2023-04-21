@@ -218,3 +218,130 @@ module.exports.slideDownload = async(req,res,next)=>{
         next(e)
     }
 }
+
+
+module.exports.delete = async(req,res,next)=>{
+    try{
+        const{subjectID,sectionID,deleteObjID} = req.params
+        const{data} = req.query
+
+        if(data==='courseMaterials'){
+            const materialIdToDelete = deleteObjID;
+            await Material.updateOne(
+                            { 'courseMaterials._id': materialIdToDelete },
+                            { $pull: { courseMaterials: { _id: materialIdToDelete } } },
+                        );
+
+            req.flash("success", "Your link has been deleted");
+            res.redirect(`/courses/${subjectID}/${sectionID}`);
+        }
+
+
+
+        if(data==='courseMarks'){
+            const materialIdToDelete = deleteObjID;
+            await Material.updateOne(
+                            { 'courseMarks._id': materialIdToDelete },
+                            { $pull: { courseMarks: { _id: materialIdToDelete } } },
+                        );
+
+            req.flash("success", "Your link has been deleted");
+            res.redirect(`/courses/${subjectID}/${sectionID}`);
+        }
+
+
+
+        if(data==='slide'){   
+            const materialIdToDelete = deleteObjID;
+
+            await Material.updateOne(
+                            { 'slides._id': materialIdToDelete },
+                            { $pull: { slides: { _id: materialIdToDelete } } },
+                        );
+
+            req.flash("success", "Your slide has been deleted");
+            res.redirect(`/courses/${subjectID}/${sectionID}`);
+        }
+
+
+
+        if(data==='file'){   
+            const materialIdToDelete = deleteObjID;
+            await Material.updateOne(
+                            { 'files._id': materialIdToDelete },
+                            { $pull: { files: { _id: materialIdToDelete } } },
+                        );
+
+            req.flash("success", "Your file has been deleted");
+            res.redirect(`/courses/${subjectID}/${sectionID}`);
+        }
+    }catch(e){
+        next(e)
+    }
+}
+
+module.exports.update = async(req,res,next)=>{
+    try {
+        
+        const{subjectID,sectionID,updateObjID} = req.params
+        const{data} = req.query
+
+        const { link, linkName, description } = req.body;
+
+        if(data==='courseMaterials'){
+
+            const material = await Material.findOne();
+
+            if (!material) {
+              return res.status(404).json({ msg: 'Material document not found' });
+            }
+        
+            const courseMaterialIndex = material.courseMaterials.findIndex(cm => cm._id.toString() === updateObjID.toString());
+
+            if (courseMaterialIndex === -1) {
+                return res.status(404).json({ msg: 'Course material not found' });
+            }
+
+            material.courseMaterials[courseMaterialIndex].link = link;
+            material.courseMaterials[courseMaterialIndex].linkName = linkName;
+            material.courseMaterials[courseMaterialIndex].description = description;
+            material.courseMaterials[courseMaterialIndex].subjectID = subjectID;
+            material.courseMaterials[courseMaterialIndex].sectionID = sectionID;
+
+            await material.save();
+
+
+            req.flash("success", "Your link has been updated");
+            res.redirect(`/courses/${subjectID}/${sectionID}`);
+        }
+
+        if(data==='courseMarks'){
+            const material = await Material.findOne();
+
+            if (!material) {
+              return res.status(404).json({ msg: 'Material document not found' });
+            }
+        
+            const courseMaterialIndex = material.courseMarks.findIndex(cm => cm._id.toString() === updateObjID.toString());
+
+            if (courseMaterialIndex === -1) {
+                return res.status(404).json({ msg: 'Course material not found' });
+            }
+
+            material.courseMarks[courseMaterialIndex].link = link;
+            material.courseMarks[courseMaterialIndex].linkName = linkName;
+            material.courseMarks[courseMaterialIndex].description = description;
+            material.courseMarks[courseMaterialIndex].subjectID = subjectID;
+            material.courseMarks[courseMaterialIndex].sectionID = sectionID;
+
+            await material.save();
+
+
+            req.flash("success", "Your link has been updated");
+            res.redirect(`/courses/${subjectID}/${sectionID}`);
+        }
+
+    } catch (e) {
+        next(e)
+    }
+}
