@@ -94,7 +94,6 @@ module.exports.createMaterial = async (req,res,next)=>{
                 subjectID:subjectID,
                 sectionID:sectionID
             }
-            file.slideName = req.body.slideName
 
             // console.log(file)
             const material = await Material.findOne();
@@ -111,38 +110,108 @@ module.exports.createMaterial = async (req,res,next)=>{
             req.flash("success", "Your Slides has been uploaded");
             res.redirect(`/courses/${subjectID}/${sectionID}`);
         }
+
     }catch(e){
         next(e)
     }
 }
 
+
+module.exports.createFile = async(req,res,next)=>{
+    try{
+        const{subjectID,sectionID} = req.params
+        const files = req.files;
+
+        const material = await Material.findOne();
+        if (material) {
+            // If a Material document already exists, update it with the new course material
+            for (const file of files) {
+                material.files.push({
+                    filename: file.filename,
+                    contentType: file.mimetype,
+                    path: file.path,
+                    subjectID: subjectID,
+                    sectionID: sectionID
+                });
+            }
+            await material.save();
+        } else {
+            // If no Material document exists, create a new one with the course material
+            const newMaterialDocument = await Material.create({ 
+            files: files.map(file => ({
+                    filename: file.filename,
+                    contentType: file.mimetype,
+                    path: file.path,
+                    subjectID: subjectID,
+                    sectionID: sectionID
+                    }))
+            });
+        }
+        req.flash("success", "Your files has been uploaded");
+        res.redirect(`/courses/${subjectID}/${sectionID}`);
+
+    }catch(e){
+        next(e)
+    }
+}
+
+
 module.exports.slideDownload = async(req,res,next)=>{
     try{
         const {slideID} = req.params
+        const {data} = req.query
 
-        // Find the slides in the database
-        const material = await Material.findOne({ "slides._id": slideID });
+        if(data==='file'){
+            // Find the slides in the database
+            const material = await Material.findOne({ "files._id": slideID });
 
-        if (!material) {
-        return res.status(404).send('Slides not found');
+            if (!material) {
+            return res.status(404).send('Slides not found');
+            }
+
+            const slide = material.files.find(slide => slide._id.toString() === slideID);
+
+            if (!slide) {
+            return res.status(404).send('file not found');
+            }
+            console.log(slide)
+
+            // Set the response headers
+            res.set({
+                'Content-Type': slide.contentType,
+                'Content-Disposition': `attachment; filename=${slide.filename}`
+            });
+
+            // Send the slides data
+            // res.download(path.join(__dirname, '..', 'public', 'slides', slide.filename), slide.filename);
+            res.download(path.join(__dirname, '..', 'public', 'slides', slide.filename), slide.filename);
         }
 
-        const slide = material.slides.find(slide => slide._id.toString() === slideID);
+        if(data==='slide'){
+            // Find the slides in the database
+            const material = await Material.findOne({ "slides._id": slideID });
 
-        if (!slide) {
-        return res.status(404).send('Slide not found');
+            if (!material) {
+            return res.status(404).send('Slides not found');
+            }
+
+            const slide = material.slides.find(slide => slide._id.toString() === slideID);
+
+            if (!slide) {
+            return res.status(404).send('Slide not found');
+            }
+            console.log(slide)
+
+            // Set the response headers
+            res.set({
+                'Content-Type': slide.contentType,
+                'Content-Disposition': `attachment; filename=${slide.filename}`
+            });
+
+            // Send the slides data
+            // res.download(path.join(__dirname, '..', 'public', 'slides', slide.filename), slide.filename);
+            res.download(path.join(__dirname, '..', 'public', 'slides', slide.filename), slide.filename);
         }
-        console.log(slide)
-
-        // Set the response headers
-        res.set({
-            'Content-Type': slide.contentType,
-            'Content-Disposition': `attachment; filename=${slide.filename}`
-        });
-
-        // Send the slides data
-        // res.download(path.join(__dirname, '..', 'public', 'slides', slide.filename), slide.filename);
-        res.download(path.join(__dirname, '..', 'public', 'slides', slide.filename), slide.filename);
 
 
     }catch(e){

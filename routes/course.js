@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {isLoggedIn} = require('../middleware')
+const {isLoggedIn,isTeacher} = require('../middleware')
 
 const courseController = require('../controllers/course')
 
@@ -14,28 +14,31 @@ const storage = multer.diskStorage({
       cb(null, 'public/slides')
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + '-' + file.originalname);
+        cb(null,file.originalname);
     }
   })
 
 //only allow .ppt file
 const fileFilter = function (req, file, cb) {
-  if (file.mimetype === 'application/vnd.ms-powerpoint' || file.mimetype === 'application/vnd.openxmlformats-officedocument.presentationml.presentation') {
-    // Accept the file
-    cb(null, true);
-  } else {
-    // Reject the file
-    cb(new Error('Only .ppt files are allowed'));
-  }
+    if (file.mimetype === 'application/vnd.ms-powerpoint' || file.mimetype === 'application/vnd.openxmlformats-officedocument.presentationml.presentation') {
+      // Accept the file
+      cb(null, true);
+    } else {
+      // Reject the file
+      cb(new Error('Only .ppt files are allowed'));
+    }
 };
 
-const upload = multer({ storage: storage, fileFilter: fileFilter });
+const slides = multer({ storage: storage, fileFilter: fileFilter });
+const anyFile = multer({ storage: storage });
 
 router.get('/',isLoggedIn,courseController.index)
 
 router.get('/:subjectID/:sectionID',isLoggedIn,courseController.show)
 
-router.post('/:subjectID/:sectionID',isLoggedIn,upload.single('slide'),courseController.createMaterial)
+router.post('/:subjectID/:sectionID',isLoggedIn,isTeacher,slides.single('slide'),courseController.createMaterial)
+
+router.put('/:subjectID/:sectionID',isLoggedIn,isTeacher,anyFile.array('file'),courseController.createFile)
 
 router.get('/slide/download/:slideID',isLoggedIn,courseController.slideDownload)
 

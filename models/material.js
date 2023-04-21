@@ -29,10 +29,6 @@ const fileUploadSchema = new mongoose.Schema({
       type: String,
       required: true
     },
-    slideName: {
-      type: String,
-      required: true
-    },
     contentType: {
       type: String,
       required: true
@@ -60,6 +56,9 @@ const materialSchema = new mongoose.Schema({
         type:[contentSchema]
     },
     slides:{
+        type:[fileUploadSchema]
+    },
+    files:{
         type:[fileUploadSchema]
     }
 })
