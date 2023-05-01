@@ -60,8 +60,8 @@ module.exports.createNotice= async(req,res,next)=>{
             const newlyCreatedNotice = await teacherNotice.save();
             if(newlyCreatedNotice.important===true){
 
-                let to = 'mfahim181238@bscse.uiu.ac.bd'
-                let from = 'fahimarefin57@gmail.com'
+                let to = 'fahimarefin57@gmail.com'
+                let from = 'maf181238@gmail.com'
                 let subject = 'Do not reply this automated mail'
                 let html = `<b>Hello Student's of section ${newlyCreatedNotice.section}</b><br>
                             Your course ${newlyCreatedNotice.subject} teacher ${newlyCreatedNotice.noticeHolder} just uploaded a very important announcement<br>
@@ -113,8 +113,8 @@ module.exports.updateNotice= async(req,res,next)=>{
         const updatedNotice = await TeacherNotice.findByIdAndUpdate(id,{ ...req.body.notice },{ runValidators: true, new: true })
         if(updatedNotice.important===true){
 
-            let to = 'maf181238@gmail.com'
-            let from = 'fahimarefin57@gmail.com'
+            let to = 'fahimarefin57@gmail.com'
+            let from = 'maf181238@gmail.com'
             let subject = 'Do not reply this mail'
             let html = `<b>Hello Student's of section ${updatedNotice.section}</b><br>
                         Your course teacher ${updatedNotice.noticeHolder} just uploaded a very important announcement<br>

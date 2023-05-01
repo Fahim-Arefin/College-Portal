@@ -162,9 +162,9 @@ app.use((err, req, res, next) => {
 
 // --------------------------------------------------------------------------------------------------------------
 
-//mfahim181238@bscse.uiu.ac.bd ---> student
-//maf181238@gmail.com ---> guardian
-//fahimarefin5@gmail.com---> teacher
+//mfahim181238@bscse.uiu.ac.bd ---> guirdians
+//maf181238@gmail.com ---> teacher
+//fahimarefin5@gmail.com---> student
 
 //first seed - student (30)
 //then seed - teacher (30)
